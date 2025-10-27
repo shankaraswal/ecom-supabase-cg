@@ -15,12 +15,12 @@ export const users = pgTable("users", {
 });
 
 // products table schema
-export const products = pgTable("products", {
-    id: serial("id").primaryKey(),
-    name: varchar("name", { length: 100 }).notNull(),
-    image: text("image"),
-    description: text("description"),
-    price: integer("price").notNull(),
-    createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
-    updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
+export const products = pgTable('products', {
+    id: serial('id').primaryKey(),
+    name: varchar('name', { length: 100 }).notNull(),
+    image: text('image'),
+    description: text('description'),
+    price: integer('price').notNull(),
+    updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
+    createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
 });
