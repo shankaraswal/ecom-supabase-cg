@@ -39,6 +39,7 @@ export async function POST(request: Request) {
     try {
 
         await db.insert(products).values({ ...validatedData, image: filename })
+        return Response.json({ message: "OK" }, { status: 201 })
     }
     catch (err) {
         // remove stored image todo
@@ -46,11 +47,10 @@ export async function POST(request: Request) {
         return Response.json({ message: "Failed to store in db", error: err }, { status: 500 })
 
     }
-    return Response.json({ message: "OK" }, { status: 201 })
 }
 
 // GET PRODUCTS
-export async function GET(request: Request) {
+export async function GET() {
 
     //  no authentication--public route
     let allProducts;
@@ -59,7 +59,7 @@ export async function GET(request: Request) {
         allProducts = await db.select().from(products).orderBy(desc(products.id));
     }
     catch (err) {
-        return Response.json({ message: "Failed to fetch products", error: err }, { status: 500 })
+        return Response.json({ message: "Failed to fetch products list", error: err }, { status: 500 })
     }
 
     return Response.json(allProducts)
