@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { integer, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { index, integer, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
     id: serial("id").primaryKey(),
@@ -14,13 +14,28 @@ export const users = pgTable("users", {
     createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
-// products table schema
-export const products = pgTable("products", {
-    id: serial("id").primaryKey(),
-    name: varchar("name", { length: 100 }).notNull(),
-    image: text("image"),
-    description: text("description"),
-    price: integer("price").notNull(),
-    createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
-    updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
+// items table schema
+export const items = pgTable('items', {
+    id: serial('id').primaryKey(),
+    name: varchar('name', { length: 100 }).notNull(),
+    image: text('image'),
+    description: text('description'),
+    price: integer('price').notNull(),
+    updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
+    createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
+});
+
+
+
+// bakeries table schema
+export const bakeries = pgTable('bakeries', {
+    id: serial('id').primaryKey(),
+    name: varchar('name', { length: 100 }).notNull(),
+    pincode: varchar('pincode', { length: 6 }).notNull(),
+    updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
+    createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
+}, (table) => {
+    return {
+        pincodeIdx: index("pincode-idx").on(table.pincode)
+    }
 });

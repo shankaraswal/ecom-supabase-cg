@@ -15,6 +15,27 @@
       "when": 1761518816408,
       "tag": "0001_wild_luke_cage",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1761530531770,
+      "tag": "0002_slim_agent_brand",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1761531004954,
+      "tag": "0003_great_thunderbolts",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1761534436133,
+      "tag": "0004_certain_next_avengers",
+      "breakpoints": true
     }
   ]
 }
