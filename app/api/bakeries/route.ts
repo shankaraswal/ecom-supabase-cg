@@ -1,7 +1,7 @@
 import { db } from "@/lib/db/db";
 import { bakeries } from "@/lib/db/schema";
 import { bakerySchema } from "@/lib/validators/bakerySchema";
-import { desc } from 'drizzle-orm';
+import { asc } from 'drizzle-orm';
 
 export async function POST(request: Request) {
     const requestData = await request.json();
@@ -31,7 +31,7 @@ export async function GET() {
     let allBakeries;
     try {
 
-        allBakeries = await db.select().from(bakeries).orderBy(desc(bakeries.id));
+        allBakeries = await db.select().from(bakeries).orderBy(asc(bakeries.id));
     }
     catch (err) {
         return Response.json({ message: "Failed to fetch bakeries list", error: err }, { status: 500 })
