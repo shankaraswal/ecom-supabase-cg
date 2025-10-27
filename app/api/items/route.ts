@@ -1,21 +1,21 @@
 import { db } from '@/lib/db/db';
-import { products } from '@/lib/db/schema';
-import { productSchema } from '@/lib/validators/productSchema';
+import { items } from '@/lib/db/schema';
+import { itemSchema } from '@/lib/validators/itemSchema';
 import { desc } from 'drizzle-orm';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 
-// POST PRODUCT
+// POST ITEM
 export async function POST(request: Request) {
-    // todo: check user acess first to add product-- only admin can add a product
+    // todo: check user access first to add item-- only admin can add an item
 
     const data = await request.formData();
 
     let validatedData;
 
     try {
-        validatedData = productSchema.parse({
+        validatedData = itemSchema.parse({
             name: data.get("name"),
             description: data.get("description"),
             price: Number(data.get("price")),
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
     try {
 
-        await db.insert(products).values({ ...validatedData, image: filename })
+        await db.insert(items).values({ ...validatedData, image: filename })
         return Response.json({ message: "OK" }, { status: 201 })
     }
     catch (err) {
@@ -49,18 +49,18 @@ export async function POST(request: Request) {
     }
 }
 
-// GET PRODUCTS
+// GET ITEMS
 export async function GET() {
 
     //  no authentication--public route
-    let allProducts;
+    let allItems;
     try {
 
-        allProducts = await db.select().from(products).orderBy(desc(products.id));
+        allItems = await db.select().from(items).orderBy(desc(items.id));
     }
     catch (err) {
-        return Response.json({ message: "Failed to fetch products list", error: err }, { status: 500 })
+        return Response.json({ message: "Failed to fetch items list", error: err }, { status: 500 })
     }
 
-    return Response.json(allProducts)
+    return Response.json(allItems)
 }

@@ -14,8 +14,8 @@ export const users = pgTable("users", {
     createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
-// products table schema
-export const products = pgTable('products', {
+// items table schema
+export const items = pgTable('items', {
     id: serial('id').primaryKey(),
     name: varchar('name', { length: 100 }).notNull(),
     image: text('image'),
@@ -27,8 +27,8 @@ export const products = pgTable('products', {
 
 
 
-// warehouses table schema
-export const warehouses = pgTable('warehouses', {
+// bakeries table schema
+export const bakeries = pgTable('bakeries', {
     id: serial('id').primaryKey(),
     name: varchar('name', { length: 100 }).notNull(),
     pincode: varchar('pincode', { length: 6 }).notNull(),
