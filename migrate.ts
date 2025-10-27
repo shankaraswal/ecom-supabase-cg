@@ -12,7 +12,7 @@ import { migrate } from 'drizzle-orm/postgres-js/migrator';
 
 (async () => {
     // Get DATABASE_URL from environment or command line
-    const dbUrl = process.env.DATABASE_URL;
+    const dbUrl = process.env.DATABASE_URL!;
     if (!dbUrl) {
         throw new Error('DATABASE_URL is not set. Please provide it via environment or command line.');
     }
